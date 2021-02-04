@@ -1,0 +1,68 @@
+<div class="min-h-screen bg-gray-50 flex flex-col justify-top">
+  <div class="sm:mt-4 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-4 sm:py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <form class="" phx-change="search">
+        <div>
+          <label for="email" class="block text-lg  font-medium text-gray-700">
+            Monitoring Device
+          </label>
+          <div class="mt-1">
+            <input name="device"
+              value ="<%= @device %>"
+              type="text"
+              placeholder="Device name ..."
+              autocomplete="off"
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+            <div class="origin-top-right absolute w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+              <ul>
+                <%= for m <- @matches do %>
+                  <li select-none class=" p-5" phx-click="select_match" phx-value-match="<%= m %>" >
+                    <a href="#"><%= m %></a>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label  class="block text-lg font-medium text-gray-700 mt-2 sm:mt-4">
+            Enter Value:
+          </label>
+          <div class="flex justify-end">
+            <div class="text-5xl"><%= @value %></div>
+          </div>
+          <input type="hidden" id="value" name="value" value="<%= @value %>">
+        </div>
+
+        <ul class="grid gap-6 grid-cols-3 mt-4 px-2">
+          <%= for n <- 1..9 do %>
+            <a  href="#" class="border rounded-md">
+              <div phx-click="number" phx-value-number="<%= n %>" class="col-span-1 flex justify-center sm:p-6 p-4 bg-gray-100">
+                <span class=" text-gray-800 text-2xl " ><%= n %></span>
+              </div>
+          </a>
+          <% end %>
+          <a  href="#">
+            <div phx-click="number" phx-value-number="." class="col-span-1 flex justify-center">
+              <span class=" text-gray-800 text-5xl " >.</span>
+              </div>
+          </a>
+          <a  href="#">
+            <div phx-click="number" phx-value-number="0" class="col-span-1 flex justify-center py-6 px-6 bg-gray-100">
+                <span class=" text-gray-800 text-2xl " >0</span>
+              </div>
+          </a>
+          <a  href="#">
+            <div phx-click="clear" class="col-span-1 flex justify-center py-8 px-8 ">
+                Clear
+              </div>
+          </a>
+        </ul>
+        <button type="submit" class="w-full flex justify-center mt-4 py-4 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <span class="text-2xl">Save</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
